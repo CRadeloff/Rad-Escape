@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rad_Escape"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Rad Escape" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel Margin="10">
+            <Grid>
+                <Grid.Background>
+                    <SolidColorBrush Color="Black" Opacity=".5" />
+                </Grid.Background>
+                <Viewbox MaxHeight="100">
+                    <Label Content="{Binding Path=Timer.CurrentText}" />
+                </Viewbox>
+            </Grid>
+
+            <Button x:Name="timerSetButton" Margin="10" Content="Set Timer" FontSize="20" Click="timerSetButton_Click" />
+            <Button x:Name="timerStartStopButton" Margin="10" FontSize="20" Content="Start/Stop Timer" Click="timerStartStopButton_Click" />
+            <Button x:Name="timerEndbutton" Margin="10" FontSize="20" Content="Complete Room" Click="timerEndbutton_Click" />
+            <Button x:Name="showOverlay" Margin="10" FontSize="20" Content="Show Overlay" Click="showOverlay_Click" />
+        </StackPanel>
     </Grid>
 </Window>
