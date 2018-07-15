@@ -9,20 +9,29 @@ namespace Rad_Escape
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public TimerClass Timer;
+        private TimerClass Timer;
+        private string currentText = "test";
+
+        public string CurrentText
+        {
+            get { return currentText; }
+            set
+            {
+                currentText = value;
+                OnPropertyChanged();
+            }
+        }
 
         public MainWindow()
         {
             DataContext = this;
             InitializeComponent();
-            Timer = new TimerClass();
-            Timer.SetTimer(1, 0, 0);
+            Timer = new TimerClass(this);
         }
 
-        public class TimerClass : INotifyPropertyChanged
-
+        public class TimerClass
         {
             private DispatcherTimer Timer = new DispatcherTimer();
             private DateTime FutureTime = new DateTime();
@@ -31,25 +40,14 @@ namespace Rad_Escape
             private string TimeFormat = @"hh\:mm\:ss\.ff";
             public string VictoryMessage = "You've escaped!";
             public string DefeatMessage = "Times up!";
+            private MainWindow CurrentWindow;
 
-            private string currentText = "test";
-
-            public string CurrentText
-            {
-                get { return currentText; }
-                set
-                {
-                    currentText = value;
-                    OnPropertyChanged();
-                }
-            }
-
-            public TimerClass()
+            public TimerClass(MainWindow mainWindow)
             {
                 TimerIsActive = false;
                 Timer.Interval = TimeSpan.FromMilliseconds(1);
                 Timer.Tick += Timer_Tick;
-                CurrentText = currentText;
+                CurrentWindow = mainWindow;
             }
 
             public void SetTimer(int startingHours, int startingMinutes, int startingSeconds)
@@ -87,37 +85,24 @@ namespace Rad_Escape
                     FutureTime = DateTime.Now;
                     return;
                 }
-                CurrentText = FutureTime.Subtract(DateTime.Now).ToString(TimeFormat);
+                CurrentWindow.CurrentText = FutureTime.Subtract(DateTime.Now).ToString(TimeFormat);
             }
 
             public void AddTime(TimeSpan AddTime)
             {
                 FutureTime += AddTime;
             }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            /// <summary>
-            /// Raises this object's PropertyChanged event.
-            /// </summary>
-            /// <param name="propertyName">The property that has a new value.</param>
-            private void OnPropertyChanged([CallerMemberName]string propertyName = null)
-            {
-                PropertyChangedEventHandler handler = this.PropertyChanged;
-                if (handler != null)
-                {
-                    var e = new PropertyChangedEventArgs(propertyName);
-                    handler(this, e);
-                }
-            }
         }
 
         private void timerSetButton_Click(object sender, RoutedEventArgs e)
         {
+            Timer.SetTimer(1, 0, 0);
+            CurrentText = "Set.";
         }
 
         private void timerStartStopButton_Click(object sender, RoutedEventArgs e)
         {
+            Timer.PauseUnpauseTimer();
         }
 
         private void timerEndbutton_Click(object sender, RoutedEventArgs e)
@@ -126,6 +111,22 @@ namespace Rad_Escape
 
         private void showOverlay_Click(object sender, RoutedEventArgs e)
         {
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Raises this object's PropertyChanged event.
+        /// </summary>
+        /// <param name="propertyName">The property that has a new value.</param>
+        private void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+            {
+                var e = new PropertyChangedEventArgs(propertyName);
+                handler(this, e);
+            }
         }
     }
 }

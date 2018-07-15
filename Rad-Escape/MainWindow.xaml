@@ -13,7 +13,7 @@
                     <SolidColorBrush Color="Black" Opacity=".5" />
                 </Grid.Background>
                 <Viewbox MaxHeight="100">
-                    <Label Content="{Binding Path=Timer.CurrentText}" />
+                    <Label Content="{Binding Path=CurrentText}" />
                 </Viewbox>
             </Grid>
 
