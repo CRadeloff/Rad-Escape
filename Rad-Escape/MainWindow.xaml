@@ -9,14 +9,12 @@
     <Grid>
         <StackPanel Margin="10">
             <Grid>
-                <Grid.Background>
-                    <SolidColorBrush Color="Black" Opacity=".5" />
-                </Grid.Background>
                 <Viewbox MaxHeight="100">
-                    <Label Content="{Binding Path=CurrentText}" />
+                    <StackPanel>
+                        <Label Content="{Binding Path=CurrentText}" />
+                    </StackPanel>
                 </Viewbox>
             </Grid>
-
             <Button x:Name="timerSetButton" Margin="10" Content="Set Timer" FontSize="20" Click="timerSetButton_Click" />
             <Button x:Name="timerStartStopButton" Margin="10" FontSize="20" Content="Start/Stop Timer" Click="timerStartStopButton_Click" />
             <Button x:Name="timerEndbutton" Margin="10" FontSize="20" Content="Complete Room" Click="timerEndbutton_Click" />
