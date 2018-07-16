@@ -7,18 +7,29 @@
         mc:Ignorable="d"
         Title="Rad Escape" Height="450" Width="800">
     <Grid>
-        <StackPanel Margin="10">
-            <Grid>
-                <Viewbox MaxHeight="100">
-                    <StackPanel>
-                        <Label Content="{Binding Path=CurrentText}" />
+        <TabControl>
+            <TabItem Header="Game Controls">
+                <Grid>
+                    <StackPanel Margin="10">
+                        <Grid>
+                            <Viewbox MaxHeight="100">
+                                <StackPanel>
+                                    <Label Content="{Binding Path=CurrentText}" />
+                                </StackPanel>
+                            </Viewbox>
+                        </Grid>
+                        <Separator />
+                        <Button x:Name="timerSetButton" Margin="10" Content="Set Timer" FontSize="20" Click="timerSetButton_Click" />
+                        <Button x:Name="timerStartStopButton" Margin="10" FontSize="20" Content="Start/Stop Timer" Click="timerStartStopButton_Click" />
+                        <Button x:Name="timerEndbutton" Margin="10" FontSize="20" Content="Complete Room" Click="timerEndbutton_Click" />
+                        <Button x:Name="showOverlay" Margin="10" FontSize="20" Content="Show Overlay" Click="showOverlay_Click" />
                     </StackPanel>
-                </Viewbox>
-            </Grid>
-            <Button x:Name="timerSetButton" Margin="10" Content="Set Timer" FontSize="20" Click="timerSetButton_Click" />
-            <Button x:Name="timerStartStopButton" Margin="10" FontSize="20" Content="Start/Stop Timer" Click="timerStartStopButton_Click" />
-            <Button x:Name="timerEndbutton" Margin="10" FontSize="20" Content="Complete Room" Click="timerEndbutton_Click" />
-            <Button x:Name="showOverlay" Margin="10" FontSize="20" Content="Show Overlay" Click="showOverlay_Click" />
-        </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Settings">
+                <Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

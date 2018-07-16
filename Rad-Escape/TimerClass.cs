@@ -10,10 +10,10 @@ namespace Rad_Escape
     public class TimerClass
     {
         private DispatcherTimer Timer = new DispatcherTimer();
-        private DateTime FutureTime = new DateTime();
-        private TimeSpan TimeLeft;
+        public DateTime FutureTime = new DateTime();
+        public TimeSpan TimeLeft;
         private bool TimerIsActive;
-        private string TimeFormat = @"hh\:mm\:ss\.ff";
+        public string TimeFormat = @"hh\:mm\:ss\.ff";
         public string VictoryMessage = "You've escaped!";
         public string DefeatMessage = "Times up!";
         private MainWindow CurrentWindow;
@@ -22,16 +22,16 @@ namespace Rad_Escape
         {
             TimerIsActive = false;
             Timer.Interval = TimeSpan.FromMilliseconds(1);
-            Timer.Tick += Timer_Tick;
+            Timer.Tick += timer_Tick;
             CurrentWindow = mainWindow;
         }
 
-        public void SetTimer(int startingHours, int startingMinutes, int startingSeconds)
+        public void setTimer(int startingHours, int startingMinutes, int startingSeconds)
         {
             TimeLeft = new TimeSpan(startingHours, startingMinutes, startingSeconds);
         }
 
-        public void PauseUnpauseTimer()
+        public void startStopTimer()
         {
             if (TimerIsActive) //pause timer and set the timeleft
             {
@@ -47,24 +47,24 @@ namespace Rad_Escape
             }
         }
 
-        public void TimeUp()
+        public void timeUp()
         {
             Timer.Stop();
             return;
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             if (FutureTime <= DateTime.Now)
             {
-                TimeUp();
+                timeUp();
                 FutureTime = DateTime.Now;
                 return;
             }
             CurrentWindow.CurrentText = FutureTime.Subtract(DateTime.Now).ToString(TimeFormat);
         }
 
-        public void AddTime(TimeSpan AddTime)
+        public void addTimer(TimeSpan AddTime)
         {
             FutureTime += AddTime;
         }
