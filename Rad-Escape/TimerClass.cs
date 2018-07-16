@@ -48,7 +48,7 @@ namespace Rad_Escape
                 TimeLeft = FutureTime.Subtract(DateTime.Now);
                 TimerIsActive = false;
             }
-            else //unpause timer
+            else
             {
                 FutureTime = DateTime.Now.Add(TimeLeft);
                 Timer.Start();
