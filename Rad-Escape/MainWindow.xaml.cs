@@ -34,7 +34,7 @@ namespace Rad_Escape
 
         private void timerSetButton_Click(object sender, RoutedEventArgs e)
         {
-            Timer.setTimer(1, 0, 0);
+            Timer.resetTimer(1, 0, 0);
             TimeSpan t = new TimeSpan(1, 0, 0);
             CurrentText = t.ToString(Timer.TimeFormat);
         }
@@ -44,8 +44,9 @@ namespace Rad_Escape
             Timer.startStopTimer();
         }
 
-        private void timerEndbutton_Click(object sender, RoutedEventArgs e)
+        private void timerCompleteButton_Click(object sender, RoutedEventArgs e)
         {
+            Timer.completeRoom();
         }
 
         private void showOverlay_Click(object sender, RoutedEventArgs e)

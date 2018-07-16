@@ -9,26 +9,35 @@ namespace Rad_Escape
 {
     public class TimerClass
     {
-        private DispatcherTimer Timer = new DispatcherTimer();
         public DateTime FutureTime = new DateTime();
         public TimeSpan TimeLeft;
-        private bool TimerIsActive;
+        public bool TimerIsActive;
         public string TimeFormat = @"hh\:mm\:ss\.ff";
         public string VictoryMessage = "You've escaped!";
         public string DefeatMessage = "Times up!";
         private MainWindow CurrentWindow;
+        private DispatcherTimer Timer = new DispatcherTimer();
 
         public TimerClass(MainWindow mainWindow)
         {
             TimerIsActive = false;
-            Timer.Interval = TimeSpan.FromMilliseconds(1);
+            Timer.Interval = TimeSpan.FromMilliseconds(10);
             Timer.Tick += timer_Tick;
             CurrentWindow = mainWindow;
         }
 
-        public void setTimer(int startingHours, int startingMinutes, int startingSeconds)
+        public void resetTimer(int startingHours, int startingMinutes, int startingSeconds)
         {
-            TimeLeft = new TimeSpan(startingHours, startingMinutes, startingSeconds);
+            if (TimerIsActive)
+            {
+                Timer.Stop();
+                TimerIsActive = false;
+                TimeLeft = new TimeSpan(startingHours, startingMinutes, startingSeconds);
+            }
+            else
+            {
+                TimeLeft = new TimeSpan(startingHours, startingMinutes, startingSeconds);
+            }
         }
 
         public void startStopTimer()
@@ -45,6 +54,13 @@ namespace Rad_Escape
                 Timer.Start();
                 TimerIsActive = true;
             }
+        }
+
+        public void completeRoom()
+        {
+            Timer.Stop();
+            TimerIsActive = false;
+            CurrentWindow.CurrentText = VictoryMessage;
         }
 
         public void timeUp()
@@ -64,9 +80,9 @@ namespace Rad_Escape
             CurrentWindow.CurrentText = FutureTime.Subtract(DateTime.Now).ToString(TimeFormat);
         }
 
-        public void addTimer(TimeSpan AddTime)
+        public void addTime(TimeSpan time)
         {
-            FutureTime += AddTime;
+            FutureTime += time;
         }
     }
 }
