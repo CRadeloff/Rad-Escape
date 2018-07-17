@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="GameWindow" Height="450" Width="800">
     <Grid>
-        
+        <DockPanel>
+            <StackPanel VerticalAlignment="Center">
+                <Grid DataContext="{Binding ElementName=Root}">
+                    <Viewbox MaxHeight="300">
+                        <Label x:Name="TimerLabel" Content="{Binding Path=currentText}" />
+                    </Viewbox>
+                </Grid>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

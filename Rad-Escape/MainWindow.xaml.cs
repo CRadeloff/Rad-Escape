@@ -51,6 +51,8 @@ namespace Rad_Escape
 
         private void showOverlay_Click(object sender, RoutedEventArgs e)
         {
+            GameWindow gw = new GameWindow(this);
+            gw.Show();
         }
 
         #region Event binding things
