@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System;
 using System.Windows.Threading;
+using System.Drawing;
+using System.Windows.Media.Imaging;
 
 namespace Rad_Escape
 {

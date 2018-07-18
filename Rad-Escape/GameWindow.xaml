@@ -5,13 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rad_Escape"
         mc:Ignorable="d"
-        Title="GameWindow" Height="450" Width="800">
+        Title="GameWindow" Height="900" Width="1600">
     <Grid>
+        <Viewbox Stretch="UniformToFill">
+            <Image x:Name="BackgroundImage" />
+        </Viewbox>
         <DockPanel>
             <StackPanel VerticalAlignment="Center">
-                <Grid>
+                <Grid Background="Black">
                     <Viewbox MaxHeight="300">
-                        <Label x:Name="TimerLabel" Content="{Binding Path=CurrentText}" />
+                        <Label x:Name="TimerLabel" Content="{Binding Path=CurrentText}" Foreground="GhostWhite" HorizontalAlignment="Center" />
                     </Viewbox>
                 </Grid>
             </StackPanel>

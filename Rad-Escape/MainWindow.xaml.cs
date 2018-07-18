@@ -3,6 +3,8 @@ using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Threading;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace Rad_Escape
 {
@@ -65,8 +67,16 @@ namespace Rad_Escape
             if (GW == null)
             {
                 GW = new GameWindow(ref this.Timer);
+                setGameWindowBackground();
                 GW.Show();
             }
+        }
+
+        public void setGameWindowBackground()
+        {
+            GW.BackgroundImage.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + @"\resources\images\DefaultBackground.jpg"));
+
+            //GW.BackgroundImage.Source = new BitmapImage(new Uri(Properties.Settings.Default.BackgroundPath));
         }
 
         #region OnPropertyChanged things
