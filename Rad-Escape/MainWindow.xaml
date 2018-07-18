@@ -20,7 +20,7 @@
                                 </Viewbox>
                             </Grid>
                             <Separator Margin="10" />
-                            <Button x:Name="timerSetButton" Margin="10" Content="Set Timer" FontSize="20" Click="timerSetButton_Click" />
+                            <Button x:Name="timerSetButton" Margin="10" Content="Set Timer" FontSize="20" Click="timerSetButton_Click" IsEnabled="True" />
                             <Button x:Name="timerStartStopButton" Margin="10" FontSize="20" Content="Start/Stop Timer" Click="timerStartStopButton_Click" />
                             <Button x:Name="timerEndbutton" Margin="10" FontSize="20" Content="Complete Room" Click="timerCompleteButton_Click" />
                             <Button x:Name="showOverlay" Margin="10" FontSize="20" Content="Show Overlay" Click="showOverlay_Click" />

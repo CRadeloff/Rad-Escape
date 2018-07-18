@@ -37,6 +37,7 @@ namespace Rad_Escape
                     currentTextContent = CurrentTimeLeft();
                     return currentTextContent;
                 }
+                updateFutureTime();
                 return currentTextContent;
             }
             set

@@ -13,23 +13,37 @@ namespace Rad_Escape
     {
         private DispatcherTimer Updater = new DispatcherTimer();
         private TimerClass Timer;
+        private GameWindow GW;
 
         private string currentText;
         public string CurrentText { get { return currentText; } set { currentText = value; OnPropertyChanged("CurrentText"); } }
 
         public MainWindow()
         {
-            Updater.Interval = TimeSpan.FromMilliseconds(10);
+            InitializeUpdater();
+            InitializeComponent();
+            Timer = new TimerClass();
+        }
+
+        private void InitializeUpdater()
+        {
+            Updater.Interval = TimeSpan.FromMilliseconds(1);
             Updater.Tick += updater_tick;
             Updater.Start();
             DataContext = this;
-            InitializeComponent();
-            Timer = new TimerClass();
         }
 
         private void updater_tick(object sender, EventArgs e)
         {
             CurrentText = Timer.CurrentText;
+            if (Timer.IsActive)
+            {
+                timerSetButton.IsEnabled = false;
+            }
+            else
+            {
+                timerSetButton.IsEnabled = true;
+            }
         }
 
         private void timerSetButton_Click(object sender, RoutedEventArgs e)
@@ -48,9 +62,14 @@ namespace Rad_Escape
 
         private void showOverlay_Click(object sender, RoutedEventArgs e)
         {
+            if (GW == null)
+            {
+                GW = new GameWindow(ref this.Timer);
+                GW.Show();
+            }
         }
 
-        #region OnPropertyChanged stuff
+        #region OnPropertyChanged things
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -64,6 +83,6 @@ namespace Rad_Escape
             }
         }
 
-        #endregion OnPropertyChanged stuff
+        #endregion OnPropertyChanged things
     }
 }

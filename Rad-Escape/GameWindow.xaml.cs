@@ -9,23 +9,48 @@ namespace Rad_Escape
     /// <summary>
     /// Interaction logic for GameWindow.xaml
     /// </summary>
-    public partial class GameWindow : Window
+    public partial class GameWindow : Window, INotifyPropertyChanged
     {
-        private string currentText = "test";
+        private DispatcherTimer Updater = new DispatcherTimer();
+        private TimerClass Timer;
 
-        public string CurrentText
+        private string currentText;
+        public string CurrentText { get { return currentText; } set { currentText = value; OnPropertyChanged("CurrentText"); } }
+
+        private void InitializeUpdater()
         {
-            get { return currentText; }
-            set
+            Updater.Interval = TimeSpan.FromMilliseconds(1);
+            Updater.Tick += updater_tick;
+            Updater.Start();
+            DataContext = this;
+        }
+
+        private void updater_tick(object sender, EventArgs e)
+        {
+            CurrentText = Timer.CurrentText;
+        }
+
+        public GameWindow(ref TimerClass timer)
+        {
+            InitializeComponent();
+            Timer = timer;
+            InitializeUpdater();
+        }
+
+        #region OnPropertyChanged things
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Create the OnPropertyChanged method to raise the event
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
             {
-                currentText = value;
-                TimerLabel.Content = value;
+                handler(this, new PropertyChangedEventArgs(name));
             }
         }
 
-        public GameWindow()
-        {
-            InitializeComponent();
-        }
+        #endregion OnPropertyChanged things
     }
 }
