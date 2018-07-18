@@ -1,88 +1,102 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Threading;
+using System.Drawing;
 
 namespace Rad_Escape
 {
     public class TimerClass
     {
-        public DateTime FutureTime = new DateTime();
-        public TimeSpan TimeLeft;
-        public bool TimerIsActive;
-        public string TimeFormat = @"hh\:mm\:ss\.ff";
+        public string TimeFormatString = @"hh\:mm\:ss\.ff";
         public string VictoryMessage = "You've escaped!";
         public string DefeatMessage = "Times up!";
-        private MainWindow CurrentWindow;
+        public Color TextColor;
         private DispatcherTimer Timer = new DispatcherTimer();
 
-        public TimerClass(MainWindow mainWindow)
-        {
-            TimerIsActive = false;
-            Timer.Interval = TimeSpan.FromMilliseconds(10);
-            Timer.Tick += timer_Tick;
-            CurrentWindow = mainWindow;
-        }
+        // We are letting the timer handle whats being shown.
+        // By setting useCustomMessage we can easily switch between what we want to display
+        // without too much of a headache.
 
-        public void resetTimer(int startingHours, int startingMinutes, int startingSeconds)
-        {
-            if (TimerIsActive)
-            {
-                Timer.Stop();
-                TimerIsActive = false;
-                TimeLeft = new TimeSpan(startingHours, startingMinutes, startingSeconds);
-            }
-            else
-            {
-                TimeLeft = new TimeSpan(startingHours, startingMinutes, startingSeconds);
-            }
-        }
+        public DateTime FutureTime { get; set; }
+        public TimeSpan timeLeft;
+        public TimeSpan TimeLeft { get { return timeLeft; } set { FutureTime = DateTime.Now.Add(value); timeLeft = value; } }
+        public bool IsActive { get; set; }
 
-        public void startStopTimer()
+        public string CurrentText { get; set; }
+
+        private string currentTextContent;
+
+        private string CurrentTextContent
         {
-            if (TimerIsActive) //pause timer and set the timeleft
+            get
             {
-                Timer.Stop();
-                TimeLeft = FutureTime.Subtract(DateTime.Now);
-                TimerIsActive = false;
+                if (IsActive)
+                {
+                    currentTextContent = CurrentTimeLeft();
+                    return currentTextContent;
+                }
+                return currentTextContent;
             }
-            else
+            set
             {
-                FutureTime = DateTime.Now.Add(TimeLeft);
-                Timer.Start();
-                TimerIsActive = true;
+                currentTextContent = value;
             }
         }
 
-        public void completeRoom()
+        public string CurrentTimeLeft()
         {
-            Timer.Stop();
-            TimerIsActive = false;
-            CurrentWindow.CurrentText = VictoryMessage;
+            TimeLeft = FutureTime.Subtract(DateTime.Now);
+            return FutureTime.Subtract(DateTime.Now).ToString(TimeFormatString);
         }
 
-        public void timeUp()
+        private void updateFutureTime()
         {
-            Timer.Stop();
-            return;
+            FutureTime = DateTime.Now.Add(TimeLeft);
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (FutureTime <= DateTime.Now)
-            {
-                timeUp();
-                FutureTime = DateTime.Now;
-                return;
-            }
-            CurrentWindow.CurrentText = FutureTime.Subtract(DateTime.Now).ToString(TimeFormat);
+            CurrentText = CurrentTextContent;
         }
 
-        public void addTime(TimeSpan time)
+        public TimerClass()
         {
-            FutureTime += time;
+            // Setting up our timer properties
+            IsActive = false;
+            Timer.Interval = TimeSpan.FromMilliseconds(1);
+            Timer.Tick += timer_Tick;
+            Timer.Start();
+            CurrentTextContent = "Timer Ready.";
+        }
+
+        public void SetTimer()
+        {
+            CurrentTextContent = new TimeSpan(1, 0, 0).ToString(TimeFormatString);
+            TimeLeft = new TimeSpan(1, 0, 0);
+        }
+
+        public void ToggleTimer()
+        {
+            if (IsActive)
+            {
+                PauseTimer();
+            }
+            else
+            {
+                StartTimer();
+            }
+        }
+
+        public void StartTimer()
+        {
+            IsActive = true;
+        }
+
+        public void PauseTimer()
+        {
+            IsActive = false;
         }
     }
 }

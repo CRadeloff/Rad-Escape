@@ -11,7 +11,7 @@
             <StackPanel VerticalAlignment="Center">
                 <Grid DataContext="{Binding ElementName=Root}">
                     <Viewbox MaxHeight="300">
-                        <Label x:Name="TimerLabel" Content="{Binding Path=currentText}" />
+                        <Label x:Name="TimerLabel" Content="{Binding Path=CurrentText}" />
                     </Viewbox>
                 </Grid>
             </StackPanel>

@@ -1,7 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System;
 using System.Windows.Threading;
 
 namespace Rad_Escape
@@ -11,68 +11,59 @@ namespace Rad_Escape
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        private DispatcherTimer Updater = new DispatcherTimer();
         private TimerClass Timer;
 
-        private string currentText = "test";
-
-        public string CurrentText
-        {
-            get { return currentText; }
-            set
-            {
-                currentText = value;
-                OnPropertyChanged();
-            }
-        }
+        private string currentText;
+        public string CurrentText { get { return currentText; } set { currentText = value; OnPropertyChanged("CurrentText"); } }
 
         public MainWindow()
         {
+            Updater.Interval = TimeSpan.FromMilliseconds(10);
+            Updater.Tick += updater_tick;
+            Updater.Start();
             DataContext = this;
             InitializeComponent();
-            Timer = new TimerClass(this);
+            Timer = new TimerClass();
+        }
+
+        private void updater_tick(object sender, EventArgs e)
+        {
+            CurrentText = Timer.CurrentText;
         }
 
         private void timerSetButton_Click(object sender, RoutedEventArgs e)
         {
-            Timer.resetTimer(1, 0, 0);
-            TimeSpan t = new TimeSpan(1, 0, 0);
-            CurrentText = t.ToString(Timer.TimeFormat);
+            Timer.SetTimer();
         }
 
         private void timerStartStopButton_Click(object sender, RoutedEventArgs e)
         {
-            Timer.startStopTimer();
+            Timer.ToggleTimer();
         }
 
         private void timerCompleteButton_Click(object sender, RoutedEventArgs e)
         {
-            Timer.completeRoom();
         }
 
         private void showOverlay_Click(object sender, RoutedEventArgs e)
         {
-            GameWindow gw = new GameWindow(this);
-            gw.Show();
         }
 
-        #region Event binding things
+        #region OnPropertyChanged stuff
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>
-        /// Raises this object's PropertyChanged event.
-        /// </summary>
-        /// <param name="propertyName">The property that has a new value.</param>
-        private void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        // Create the OnPropertyChanged method to raise the event
+        protected void OnPropertyChanged(string name)
         {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
+            PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
             {
-                var e = new PropertyChangedEventArgs(propertyName);
-                handler(this, e);
+                handler(this, new PropertyChangedEventArgs(name));
             }
         }
 
-        #endregion Event binding things
+        #endregion OnPropertyChanged stuff
     }
 }

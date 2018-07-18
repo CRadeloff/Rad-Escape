@@ -15,7 +15,7 @@
                             <Grid>
                                 <Viewbox MaxHeight="150">
                                     <StackPanel>
-                                        <Label Content="{Binding Path=CurrentText}" />
+                                        <Label x:Name="TimerPreview" Content="{Binding Path=CurrentText}" />
                                     </StackPanel>
                                 </Viewbox>
                             </Grid>

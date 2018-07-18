@@ -9,35 +9,23 @@ namespace Rad_Escape
     /// <summary>
     /// Interaction logic for GameWindow.xaml
     /// </summary>
-    public partial class GameWindow : Window, INotifyPropertyChanged
+    public partial class GameWindow : Window
     {
-        private string currentText;
+        private string currentText = "test";
 
-        public GameWindow(MainWindow window)
+        public string CurrentText
         {
-            InitializeComponent();
-
-            currentText = window.CurrentText;
-        }
-
-        #region Event binding things
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Raises this object's PropertyChanged event.
-        /// </summary>
-        /// <param name="propertyName">The property that has a new value.</param>
-        private void OnPropertyChanged([CallerMemberName]string propertyName = null)
-        {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (handler != null)
+            get { return currentText; }
+            set
             {
-                var e = new PropertyChangedEventArgs(propertyName);
-                handler(this, e);
+                currentText = value;
+                TimerLabel.Content = value;
             }
         }
 
-        #endregion Event binding things
+        public GameWindow()
+        {
+            InitializeComponent();
+        }
     }
 }
