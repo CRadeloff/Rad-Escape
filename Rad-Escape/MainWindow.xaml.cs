@@ -15,7 +15,7 @@ namespace Rad_Escape
     {
         private DispatcherTimer Updater = new DispatcherTimer();
         private TimerClass Timer;
-        private GameWindow GW;
+        private GameWindowClass GameWindow;
 
         private string currentText;
         public string CurrentText { get { return currentText; } set { currentText = value; OnPropertyChanged("CurrentText"); } }
@@ -64,19 +64,17 @@ namespace Rad_Escape
 
         private void showOverlay_Click(object sender, RoutedEventArgs e)
         {
-            if (GW == null)
+            if (GameWindow == null)
             {
-                GW = new GameWindow(ref this.Timer);
+                GameWindow = new GameWindowClass(ref this.Timer);
                 setGameWindowBackground();
-                GW.Show();
+                GameWindow.Show();
             }
         }
 
         public void setGameWindowBackground()
         {
-            GW.BackgroundImage.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + @"\resources\images\DefaultBackground.jpg"));
-
-            //GW.BackgroundImage.Source = new BitmapImage(new Uri(Properties.Settings.Default.BackgroundPath));
+            GameWindow.BackgroundImage.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + @"\resources\images\DefaultBackground.jpg"));
         }
 
         #region OnPropertyChanged things

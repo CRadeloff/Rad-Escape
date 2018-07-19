@@ -5,14 +5,24 @@ using System;
 using System.Windows.Threading;
 using System.Drawing;
 using System.Windows.Media.Imaging;
+using System.Collections.Generic;
 
 namespace Rad_Escape
 {
     /// <summary>
-    /// Interaction logic for GameWindow.xaml
+    /// Interaction logic for GameWindowClass.xaml
     /// </summary>
-    public partial class GameWindow : Window, INotifyPropertyChanged
+    public partial class GameWindowClass : Window, INotifyPropertyChanged
     {
+        public struct ClueStruct
+        {
+            public bool isUsed;
+            public string cluePath;
+            public string clueUsedPath;
+        }
+
+        private List<ClueStruct> cluelist = new List<ClueStruct>();
+
         private DispatcherTimer Updater = new DispatcherTimer();
         private TimerClass Timer;
 
@@ -32,11 +42,18 @@ namespace Rad_Escape
             CurrentText = Timer.CurrentText;
         }
 
-        public GameWindow(ref TimerClass timer)
+        public GameWindowClass(ref TimerClass timer)
         {
             InitializeComponent();
             Timer = timer;
             InitializeUpdater();
+        }
+
+        public void addClue()
+        {
+            ClueStruct clue = new ClueStruct();
+            clue.cluePath = @"\resources\images\lock.png"; clue.isUsed = false;
+            cluelist.Add(clue);
         }
 
         #region OnPropertyChanged things
