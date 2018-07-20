@@ -28,7 +28,7 @@ namespace Rad_Escape
 
         private string currentTextContent;
 
-        private string CurrentTextContent
+        public string CurrentTextContent
         {
             get
             {

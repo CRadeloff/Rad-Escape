@@ -63,6 +63,11 @@ namespace Rad_Escape
         {
         }
 
+        private void UpdateBackgroundButton_Click(object sender, RoutedEventArgs e)
+        {
+            updateImageBackground();
+        }
+
         private void showOverlay_Click(object sender, RoutedEventArgs e)
         {
             if (GameWindow == null) // Create new instance of GameWindow if its not make and return
@@ -118,10 +123,5 @@ namespace Rad_Escape
         }
 
         #endregion OnPropertyChanged things
-
-        private void UpdateBackgroundButton_Click(object sender, RoutedEventArgs e)
-        {
-            updateImageBackground();
-        }
     }
 }
