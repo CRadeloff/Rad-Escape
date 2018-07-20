@@ -37,8 +37,11 @@ namespace Rad_Escape
                     currentTextContent = CurrentTimeLeft();
                     return currentTextContent;
                 }
-                updateFutureTime();
-                return currentTextContent;
+                else
+                {
+                    updateFutureTime();
+                    return currentTextContent;
+                }
             }
             set
             {
@@ -62,20 +65,24 @@ namespace Rad_Escape
             CurrentText = CurrentTextContent;
         }
 
-        public TimerClass()
+        private void setupTimer()
         {
-            // Setting up our timer properties
-            IsActive = false;
             Timer.Interval = TimeSpan.FromMilliseconds(1);
             Timer.Tick += timer_Tick;
             Timer.Start();
+        }
+
+        public TimerClass()
+        {
+            IsActive = false;
+            setupTimer();
             CurrentTextContent = "Timer Ready.";
         }
 
-        public void SetTimer()
+        public void SetTimer(int hours, int minutes, int seconds)
         {
-            CurrentTextContent = new TimeSpan(1, 0, 0).ToString(TimeFormatString);
-            TimeLeft = new TimeSpan(1, 0, 0);
+            CurrentTextContent = new TimeSpan(hours, minutes, seconds).ToString(TimeFormatString);
+            TimeLeft = new TimeSpan(hours, minutes, seconds);
         }
 
         public void ToggleTimer()

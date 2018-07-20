@@ -51,7 +51,7 @@ namespace Rad_Escape
 
         private void timerSetButton_Click(object sender, RoutedEventArgs e)
         {
-            Timer.SetTimer();
+            Timer.SetTimer(1, 0, 0);
         }
 
         private void timerStartStopButton_Click(object sender, RoutedEventArgs e)
