@@ -25,13 +25,13 @@ namespace Rad_Escape.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string BackgroundPath {
+        [global::System.Configuration.DefaultSettingValueAttribute("\\resources\\images\\DefaultBackground.jpg")]
+        public string DefaultBackgroundPath {
             get {
-                return ((string)(this["BackgroundPath"]));
+                return ((string)(this["DefaultBackgroundPath"]));
             }
             set {
-                this["BackgroundPath"] = value;
+                this["DefaultBackgroundPath"] = value;
             }
         }
     }

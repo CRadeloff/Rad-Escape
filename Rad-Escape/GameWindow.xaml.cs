@@ -6,6 +6,7 @@ using System.Windows.Threading;
 using System.Drawing;
 using System.Windows.Media.Imaging;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Rad_Escape
 {
@@ -14,20 +15,10 @@ namespace Rad_Escape
     /// </summary>
     public partial class GameWindowClass : Window, INotifyPropertyChanged
     {
-        public struct ClueStruct
-        {
-            public bool isUsed;
-            public string cluePath;
-            public string clueUsedPath;
-        }
-
-        private List<ClueStruct> cluelist = new List<ClueStruct>();
+        #region Updater Region
 
         private DispatcherTimer Updater = new DispatcherTimer();
         private TimerClass Timer;
-
-        private string currentText;
-        public string CurrentText { get { return currentText; } set { currentText = value; OnPropertyChanged("CurrentText"); } }
 
         private void InitializeUpdater()
         {
@@ -41,6 +32,23 @@ namespace Rad_Escape
         {
             CurrentText = Timer.CurrentText;
         }
+
+        #endregion Updater Region
+
+        public struct ClueStruct
+        {
+            public bool isUsed;
+            public string cluePath;
+            public string clueUsedPath;
+        }
+
+        private List<ClueStruct> cluelist = new List<ClueStruct>();
+
+        public BitmapImage BackgroundBitmapImage { get { return backgroundBitmapImage; } set { backgroundBitmapImage = value; OnPropertyChanged("BackgroundBitmapImage"); } }
+        private BitmapImage backgroundBitmapImage;
+
+        public string CurrentText { get { return currentText; } set { currentText = value; OnPropertyChanged("CurrentText"); } }
+        private string currentText;
 
         public GameWindowClass(ref TimerClass timer)
         {
@@ -71,5 +79,11 @@ namespace Rad_Escape
         }
 
         #endregion OnPropertyChanged things
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Visibility = Visibility.Collapsed;
+        }
     }
 }

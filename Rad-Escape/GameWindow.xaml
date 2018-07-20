@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rad_Escape"
         mc:Ignorable="d"
-        Title="GameWindow" Height="900" Width="1600">
+        Title="GameWindow" Height="900" Width="1600" Closing="Window_Closing">
     <Grid>
         <Viewbox Stretch="UniformToFill">
-            <Image x:Name="BackgroundImage" />
+            <Image x:Name="BackgroundImage" Source="{Binding BackgroundBitmapImage}" />
         </Viewbox>
         <DockPanel>
             <Grid DockPanel.Dock="Top">

@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Threading;
 using System.Windows.Media.Imaging;
 using System.IO;
+using System.Drawing;
 
 namespace Rad_Escape
 {
@@ -64,17 +65,42 @@ namespace Rad_Escape
 
         private void showOverlay_Click(object sender, RoutedEventArgs e)
         {
-            if (GameWindow == null)
+            if (GameWindow == null) // Create new instance of GameWindow if its not make and return
             {
                 GameWindow = new GameWindowClass(ref this.Timer);
-                setGameWindowBackground();
                 GameWindow.Show();
+                updateImageBackground();
+                return;
+            }
+            if (GameWindow.Visibility == Visibility.Collapsed)
+            {
+                GameWindow.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                GameWindow.Visibility = Visibility.Collapsed;
+            }
+            updateImageBackground();
+        }
+
+        public void updateImageBackground()
+        {
+            if (BackgroundPath.PathBoxText == "")
+            {
+                var img = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + Properties.Settings.Default.DefaultBackgroundPath));
+                img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                GameWindow.BackgroundBitmapImage = img;
+            }
+            else
+            {
+                var img = new BitmapImage(new Uri(BackgroundPath.PathBoxText));
+                img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                GameWindow.BackgroundBitmapImage = img;
             }
         }
 
-        public void setGameWindowBackground()
+        public void LoadSettings()
         {
-            GameWindow.BackgroundImage.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + @"\resources\images\DefaultBackground.jpg"));
         }
 
         #region OnPropertyChanged things
@@ -92,5 +118,10 @@ namespace Rad_Escape
         }
 
         #endregion OnPropertyChanged things
+
+        private void UpdateBackgroundButton_Click(object sender, RoutedEventArgs e)
+        {
+            updateImageBackground();
+        }
     }
 }

@@ -30,6 +30,10 @@
             </TabItem>
             <TabItem Header="Settings">
                 <Grid>
+                    <StackPanel>
+                        <local:PathChooser x:Name="BackgroundPath" ButtonText="Set Background" />
+                        <Button x:Name="UpdateBackgroundButton" Content="Update Background Image" Margin="10" Click="UpdateBackgroundButton_Click" />
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>
