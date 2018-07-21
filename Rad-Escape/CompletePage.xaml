@@ -9,9 +9,23 @@
       Title="Page1">
 
     <Grid Background="Black">
-        <Viewbox>
-            <StackPanel>
-            </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <Viewbox Grid.Row="0">
+            <Label x:Name="TopMessage" Foreground="White" HorizontalAlignment="Center" />
+        </Viewbox>
+        <Viewbox Grid.Row="1">
+            <Label x:Name="AboveTimeMessage" Foreground="White" HorizontalAlignment="Center" />
+        </Viewbox>
+        <Viewbox Grid.Row="2">
+            <Label x:Name="TimeMessage" Foreground="White" HorizontalAlignment="Center" />
+        </Viewbox>
+        <Viewbox Grid.Row="3">
+            <Label x:Name="BottomMessage" Foreground="White" HorizontalAlignment="Center" />
         </Viewbox>
     </Grid>
 </Page>

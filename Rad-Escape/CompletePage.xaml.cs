@@ -20,9 +20,26 @@ namespace Rad_Escape
     /// </summary>
     public partial class CompletePage : Page
     {
-        public CompletePage()
+        public CompletePage(string topMessage, TimeSpan finalTime, string bottomMessage, int numCluesUsed)
         {
             InitializeComponent();
+            TopMessage.Content = topMessage;
+            AboveTimeMessage.Content = "Your Final Time:";
+            addClues(ref finalTime, numCluesUsed);
+            TimeMessage.Content = finalTime.ToString(@"hh\:mm\:ss\.ff");
+            BottomMessage.Content = bottomMessage;
+        }
+
+        private void addClues(ref TimeSpan finalTime, int numClues)
+        {
+            if (numClues <= 3)
+            {
+                return;
+            }
+            for (int i = 0; i < numClues; i++)
+            {
+                finalTime = finalTime.Add(new TimeSpan(0, numClues, 0));
+            }
         }
     }
 }

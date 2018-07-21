@@ -52,7 +52,14 @@ namespace Rad_Escape
 
         private void timerSetButton_Click(object sender, RoutedEventArgs e)
         {
+            clearCompletePage();
+            timerStartStopButton.IsEnabled = true;
             Timer.SetTimer(1, 0, 0);
+        }
+
+        private void clearCompletePage()
+        {
+            GameWindow.DisplayFrame.Content = null;
         }
 
         private void timerStartStopButton_Click(object sender, RoutedEventArgs e)
@@ -62,7 +69,9 @@ namespace Rad_Escape
 
         private void timerCompleteButton_Click(object sender, RoutedEventArgs e)
         {
-            GameWindow.DisplayFrame.Content = new CompletePage();
+            Timer.PauseTimer();
+            timerStartStopButton.IsEnabled = false;
+            GameWindow.DisplayFrame.Content = new CompletePage("GameName", Timer.TimeLeft, "Bottom Message", 3);
         }
 
         private void UpdateBackgroundButton_Click(object sender, RoutedEventArgs e)

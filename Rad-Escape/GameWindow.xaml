@@ -20,11 +20,11 @@
             <StackPanel VerticalAlignment="Center">
                 <Grid Background="Black">
                     <Viewbox MaxHeight="300">
-                        <Label x:Name="TimerLabel" Content="{Binding Path=CurrentText}" Foreground="GhostWhite" HorizontalAlignment="Center" />
+                        <TextBox x:Name="TimerLabel" Text="{Binding Path=CurrentText}" Focusable="False" Foreground="White" Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent" />
                     </Viewbox>
                 </Grid>
             </StackPanel>
         </DockPanel>
-        <Frame x:Name="DisplayFrame" />
+        <Frame NavigationUIVisibility="Hidden" x:Name="DisplayFrame" />
     </Grid>
 </Window>
