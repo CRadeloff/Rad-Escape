@@ -26,6 +26,7 @@ namespace Rad_Escape
             InitializeUpdater();
             InitializeComponent();
             Timer = new TimerClass();
+            GameWindow = new GameWindowClass(ref Timer);
         }
 
         private void InitializeUpdater()
@@ -61,6 +62,7 @@ namespace Rad_Escape
 
         private void timerCompleteButton_Click(object sender, RoutedEventArgs e)
         {
+            GameWindow.DisplayFrame.Content = new CompletePage();
         }
 
         private void UpdateBackgroundButton_Click(object sender, RoutedEventArgs e)
@@ -70,13 +72,6 @@ namespace Rad_Escape
 
         private void showOverlay_Click(object sender, RoutedEventArgs e)
         {
-            if (GameWindow == null) // Create new instance of GameWindow if its not make and return
-            {
-                GameWindow = new GameWindowClass(ref this.Timer);
-                GameWindow.Show();
-                updateImageBackground();
-                return;
-            }
             if (GameWindow.Visibility == Visibility.Collapsed)
             {
                 GameWindow.Visibility = Visibility.Visible;

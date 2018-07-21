@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="GameWindow" Height="900" Width="1600" Closing="Window_Closing">
     <Grid>
+
         <Viewbox Stretch="UniformToFill">
             <Image x:Name="BackgroundImage" Source="{Binding BackgroundBitmapImage}" />
         </Viewbox>
@@ -24,5 +25,6 @@
                 </Grid>
             </StackPanel>
         </DockPanel>
+        <Frame x:Name="DisplayFrame" />
     </Grid>
 </Window>
