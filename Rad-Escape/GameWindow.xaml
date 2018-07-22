@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rad_Escape"
         mc:Ignorable="d"
-        Title="GameWindow" Height="900" Width="1600" Closing="Window_Closing">
+        Title="GameWindow" Height="720" Width="1280" Closing="Window_Closing">
     <Grid>
 
         <Viewbox Stretch="UniformToFill">
@@ -13,8 +13,13 @@
         </Viewbox>
         <DockPanel>
             <Grid DockPanel.Dock="Top">
-                <StackPanel Orientation="Horizontal" MinHeight="100" MaxHeight="150" HorizontalAlignment="Right" Margin="10">
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel x:Name="ClueStackPannel" Grid.Column="1" Orientation="Horizontal" MinHeight="100" MaxHeight="150" HorizontalAlignment="Right" Margin="10" />
+                </Grid>
                 <Separator VerticalAlignment="Bottom" />
             </Grid>
             <StackPanel VerticalAlignment="Center">

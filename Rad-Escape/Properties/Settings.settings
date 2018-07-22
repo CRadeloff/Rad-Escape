@@ -5,5 +5,14 @@
     <Setting Name="DefaultBackgroundPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">\resources\images\DefaultBackground.jpg</Value>
     </Setting>
+    <Setting Name="DefaultClueImagePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\resources\images\lock.png</Value>
+    </Setting>
+    <Setting Name="DefaultClueUsedImagePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\resources\images\RedX.png</Value>
+    </Setting>
+    <Setting Name="DefaultNumClues" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

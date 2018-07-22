@@ -12,7 +12,7 @@
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="PathBox" Grid.Column="0" VerticalAlignment="Center" IsEnabled="False" Margin="10" />
-        <Button x:Name="Button" Grid.Column="1" VerticalAlignment="Center" Content="" Margin="10" Click="Button_Click" />
+        <TextBox x:Name="PathBox" Grid.Column="0" Text="" Margin="10" />
+        <Button x:Name="PathButton" Grid.Column="1" Content="" VerticalAlignment="Center" Margin="10" Click="Button_Click" />
     </Grid>
 </UserControl>

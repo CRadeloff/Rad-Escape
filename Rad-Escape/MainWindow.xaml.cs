@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Threading;
 using System.Windows.Media.Imaging;
 using System.IO;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Rad_Escape
@@ -74,11 +75,6 @@ namespace Rad_Escape
             GameWindow.DisplayFrame.Content = new CompletePage("GameName", Timer.TimeLeft, "Bottom Message", 3);
         }
 
-        private void UpdateBackgroundButton_Click(object sender, RoutedEventArgs e)
-        {
-            updateImageBackground();
-        }
-
         private void showOverlay_Click(object sender, RoutedEventArgs e)
         {
             if (GameWindow.Visibility == Visibility.Collapsed)
@@ -94,7 +90,7 @@ namespace Rad_Escape
 
         public void updateImageBackground()
         {
-            if (BackgroundPath.PathBoxText == "")
+            if (BackgroundImagePath.PathBoxText == "" || BackgroundImagePath.PathBoxText == null)
             {
                 var img = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + Properties.Settings.Default.DefaultBackgroundPath));
                 img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
@@ -102,14 +98,10 @@ namespace Rad_Escape
             }
             else
             {
-                var img = new BitmapImage(new Uri(BackgroundPath.PathBoxText));
+                var img = new BitmapImage(new Uri(BackgroundImagePath.PathBoxText));
                 img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                 GameWindow.BackgroundBitmapImage = img;
             }
-        }
-
-        public void LoadSettings()
-        {
         }
 
         #region OnPropertyChanged things
@@ -127,5 +119,29 @@ namespace Rad_Escape
         }
 
         #endregion OnPropertyChanged things
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            //Ensures windows that may be hidden are closed when the user presses the exit button. Provides confirmation first
+            MessageBoxResult result = MessageBox.Show("Are you sure you wish to close Rad-Escape?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                Application.Current.Shutdown();
+            }
+        }
+
+        private void UpdateImagesButton_Click(object sender, RoutedEventArgs e)
+        {
+            updateImageBackground();
+            updateClueImages();
+        }
+
+        private void updateClueImages()
+        {
+        }
     }
 }

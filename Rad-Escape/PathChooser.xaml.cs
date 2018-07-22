@@ -20,16 +20,16 @@ namespace Rad_Escape
     /// </summary>
     public partial class PathChooser : UserControl
     {
-        public string ButtonText
-        {
-            get { return Button.Content.ToString(); }
-            set { Button.Content = value; }
-        }
-
         public string PathBoxText
         {
             get { return PathBox.Text; }
             set { PathBox.Text = value; }
+        }
+
+        public string ButtonText
+        {
+            get { return PathButton.Content.ToString(); }
+            set { PathButton.Content = value; }
         }
 
         public PathChooser()
