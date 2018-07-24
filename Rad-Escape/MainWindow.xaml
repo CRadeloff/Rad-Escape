@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rad_Escape"
         mc:Ignorable="d"
+        xmlns:properties="clr-namespace:Rad_Escape.Properties"
         Title="Rad Escape" Height="527.716" Width="800" Closing="Window_Closing">
     <Grid>
         <TabControl Margin="5">
@@ -31,10 +32,32 @@
             <TabItem Header="Settings">
                 <Grid>
                     <StackPanel>
-                        <local:PathChooser x:Name="BackgroundImagePath" ButtonText="Choose Background Image" />
-                        <local:PathChooser x:Name="CluePath" ButtonText="Choose Clue Image" />
-                        <local:PathChooser x:Name="ClueUsedPath" ButtonText="Choose Used Clue Image" />
-                        <Button x:Name="UpdateImagesButton" Content="Update Images" Click="UpdateImagesButton_Click" Margin="10" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="BackgroundPathTextBox" Grid.Column="0" Text="{Binding Source={x:Static properties:Settings.Default},Path=BackgroundPath}" Margin="10" />
+                            <Button x:Name="BackgroundPathButton" Grid.Column="1" Content="Choose Background Path" VerticalAlignment="Center" Margin="10" Click="BackgroundPathButton_Click" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="ClueImagePathTextBox" Grid.Column="0" Text="{Binding Source={x:Static properties:Settings.Default},Path=ClueImagePath}" Margin="10" />
+                            <Button x:Name="ClueImagePathButton" Grid.Column="1" Content="Choose Clue Image Path" VerticalAlignment="Center" Margin="10" Click="ClueImagePathButton_Click" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="ClueUsedImagePathTextBox" Grid.Column="0" Text="{Binding Source={x:Static properties:Settings.Default},Path=ClueUsedImagePath}" Margin="10" />
+                            <Button x:Name="ClueUsedImagePathButton" Grid.Column="1" Content="Choose Used Clue Image Path" VerticalAlignment="Center" Margin="10" Click="ClueUsedImagePathButton_Click" />
+                        </Grid>
+                        <Button x:Name="SaveSettingsButton" Content="Save Settings" Click="SaveSettingsButton_Click" Margin="10" />
+                        <Button x:Name="ResetSettingsButton" Content="Reset Settings" Click="ResetSettingsButton_Click" Margin="10" />
                     </StackPanel>
                 </Grid>
             </TabItem>

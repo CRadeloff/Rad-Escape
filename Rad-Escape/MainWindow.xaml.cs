@@ -15,6 +15,7 @@ namespace Rad_Escape
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        private UtilitiesClass Utilities = new UtilitiesClass();
         private DispatcherTimer Updater = new DispatcherTimer();
         private TimerClass Timer;
         private GameWindowClass GameWindow;
@@ -90,7 +91,7 @@ namespace Rad_Escape
 
         public void updateImageBackground()
         {
-            if (BackgroundImagePath.PathBoxText == "" || BackgroundImagePath.PathBoxText == null)
+            if (Properties.Settings.Default.BackgroundPath == "")
             {
                 var img = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + Properties.Settings.Default.DefaultBackgroundPath));
                 img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
@@ -98,7 +99,7 @@ namespace Rad_Escape
             }
             else
             {
-                var img = new BitmapImage(new Uri(BackgroundImagePath.PathBoxText));
+                var img = new BitmapImage(new Uri(Properties.Settings.Default.BackgroundPath));
                 img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                 GameWindow.BackgroundBitmapImage = img;
             }
@@ -134,14 +135,44 @@ namespace Rad_Escape
             }
         }
 
-        private void UpdateImagesButton_Click(object sender, RoutedEventArgs e)
+        private void SaveSettingsButton_Click(object sender, RoutedEventArgs e)
         {
+            Properties.Settings.Default.Save();
             updateImageBackground();
             updateClueImages();
+            MessageBox.Show("Settings Saved");
         }
 
         private void updateClueImages()
         {
+        }
+
+        private void BackgroundPathButton_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.BackgroundPath = Utilities.choosePath();
+        }
+
+        private void ClueImagePathButton_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.ClueImagePath = Utilities.choosePath();
+        }
+
+        private void ClueUsedImagePathButton_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.ClueUsedImagePath = Utilities.choosePath();
+        }
+
+        private void ResetSettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you wish to revert ALL settings to their default values?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.No)
+            {
+                return;
+            }
+            else
+            {
+                Properties.Settings.Default.Reset();
+            }
         }
     }
 }

@@ -70,5 +70,53 @@ namespace Rad_Escape.Properties {
                 this["DefaultNumClues"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BackgroundPath {
+            get {
+                return ((string)(this["BackgroundPath"]));
+            }
+            set {
+                this["BackgroundPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ClueImagePath {
+            get {
+                return ((string)(this["ClueImagePath"]));
+            }
+            set {
+                this["ClueImagePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ClueUsedImagePath {
+            get {
+                return ((string)(this["ClueUsedImagePath"]));
+            }
+            set {
+                this["ClueUsedImagePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int NumClues {
+            get {
+                return ((int)(this["NumClues"]));
+            }
+            set {
+                this["NumClues"] = value;
+            }
+        }
     }
 }

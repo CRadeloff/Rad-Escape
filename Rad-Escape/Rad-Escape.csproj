@@ -68,10 +68,8 @@
     <Compile Include="CompletePage.xaml.cs">
       <DependentUpon>CompletePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PathChooser.xaml.cs">
-      <DependentUpon>PathChooser.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TimerClass.cs" />
+    <Compile Include="UtilitiesClass.cs" />
     <Page Include="GameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -89,10 +87,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="CompletePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PathChooser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
