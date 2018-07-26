@@ -152,5 +152,20 @@ namespace Rad_Escape
                 Properties.Settings.Default.Reset();
             }
         }
+
+        private void addOneClue_Click(object sender, RoutedEventArgs e)
+        {
+            GameWindow.addClue();
+        }
+
+        private void useOneCluie_Click(object sender, RoutedEventArgs e)
+        {
+            GameWindow.useClue();
+        }
+
+        private void giveClueBack_Click(object sender, RoutedEventArgs e)
+        {
+            GameWindow.giveClueBack();
+        }
     }
 }

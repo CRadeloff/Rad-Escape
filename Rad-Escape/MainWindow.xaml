@@ -25,6 +25,9 @@
                             <Button x:Name="timerStartStopButton" Margin="10" FontSize="20" Content="Start/Stop Timer" Click="timerStartStopButton_Click" />
                             <Button x:Name="timerEndbutton" Margin="10" FontSize="20" Content="Complete Room" Click="timerCompleteButton_Click" />
                             <Button x:Name="showOverlay" Margin="10" FontSize="20" Content="Show Overlay" Click="showOverlay_Click" />
+                            <Button x:Name="addOneClue" Margin="10" FontSize="20" Content="Add Clue" Click="addOneClue_Click" />
+                            <Button x:Name="useOneCluie" Margin="10" FontSize="20" Content="Use Clue" Click="useOneCluie_Click" />
+                            <Button x:Name="giveClueBack" Margin="10" FontSize="20" Content="Use Clue" Click="giveClueBack_Click" />
                         </StackPanel>
                     </DockPanel>
                 </Grid>
