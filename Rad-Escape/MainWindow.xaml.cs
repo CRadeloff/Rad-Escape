@@ -81,7 +81,7 @@ namespace Rad_Escape
             {
                 GameWindow.Visibility = Visibility.Collapsed;
             }
-            GameWindow.updateBackground();
+            GameWindow.refreshBackground();
         }
 
         #region OnPropertyChanged things
@@ -117,12 +117,8 @@ namespace Rad_Escape
         private void SaveSettingsButton_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Save();
-            GameWindow.updateBackground();
-            updateClueImages();
-        }
-
-        private void updateClueImages()
-        {
+            GameWindow.refreshBackground();
+            GameWindow.refreshClueImages();
         }
 
         private void BackgroundPathButton_Click(object sender, RoutedEventArgs e)
@@ -166,6 +162,11 @@ namespace Rad_Escape
         private void giveClueBack_Click(object sender, RoutedEventArgs e)
         {
             GameWindow.giveClueBack();
+        }
+
+        private void removeClueButton_Click(object sender, RoutedEventArgs e)
+        {
+            GameWindow.removeClue();
         }
     }
 }

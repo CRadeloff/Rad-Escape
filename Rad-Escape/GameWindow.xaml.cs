@@ -50,7 +50,7 @@ namespace Rad_Escape
             InitializeUpdater();
         }
 
-        public void updateBackground()
+        public void refreshBackground()
         {
             if (Properties.Settings.Default.BackgroundPath == "")
             {
@@ -88,6 +88,15 @@ namespace Rad_Escape
             }
         }
 
+        public void removeClue()
+        {
+            if (ClueStackPannel.Children.Count == 0)
+            {
+                return;
+            }
+            ClueStackPannel.Children.RemoveAt(ClueStackPannel.Children.Count - 1);
+        }
+
         public void giveClueBack()
         {
             // With a stack pannel we cant go to a certain index, so we have a public variable that keeps track of the
@@ -113,6 +122,15 @@ namespace Rad_Escape
                 {
                     Clue.IsUsed = false;
                 }
+            }
+        }
+
+        public void refreshClueImages()
+        {
+            foreach (ClueControl clue in ClueStackPannel.Children)
+            {
+                clue.updateClueImage();
+                clue.updateClueUsedImage();
             }
         }
 

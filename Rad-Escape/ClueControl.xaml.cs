@@ -24,7 +24,7 @@ namespace Rad_Escape
     {
         public BitmapImage ClueImage;
         public BitmapImage ClueUsedImage;
-        private bool isUsed;
+        private bool isUsed = false;
 
         public bool IsUsed
         {
@@ -67,6 +67,11 @@ namespace Rad_Escape
                 img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                 ClueImage = img;
             }
+            if (IsUsed == false)
+            {
+                CurrentImage = ClueImage;
+            }
+            refreshImages();
         }
 
         public void updateClueUsedImage()
@@ -83,6 +88,19 @@ namespace Rad_Escape
                 var img = new BitmapImage(new Uri(Properties.Settings.Default.ClueUsedImagePath));
                 img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                 ClueUsedImage = img;
+            }
+            refreshImages();
+        }
+
+        private void refreshImages()
+        {
+            if (IsUsed == false)
+            {
+                CurrentImage = ClueImage;
+            }
+            else if (IsUsed == true)
+            {
+                CurrentImage = ClueUsedImage;
             }
         }
 
