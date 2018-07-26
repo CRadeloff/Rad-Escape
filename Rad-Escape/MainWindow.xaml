@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Rad_Escape"
         mc:Ignorable="d"
         xmlns:properties="clr-namespace:Rad_Escape.Properties"
-        Title="Rad Escape" Height="527.716" Width="800" Closing="Window_Closing">
+        Title="Rad Escape" Height="755.716" Width="827" Closing="Window_Closing">
     <Grid>
         <TabControl Margin="5">
             <TabItem Header="Game Controls">

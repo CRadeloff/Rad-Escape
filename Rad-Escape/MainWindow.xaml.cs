@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Threading;
-using System.Windows.Media.Imaging;
-using System.IO;
-using System.Collections.Generic;
-using System.Drawing;
 
 namespace Rad_Escape
 {
@@ -86,23 +81,7 @@ namespace Rad_Escape
             {
                 GameWindow.Visibility = Visibility.Collapsed;
             }
-            updateImageBackground();
-        }
-
-        public void updateImageBackground()
-        {
-            if (Properties.Settings.Default.BackgroundPath == "")
-            {
-                var img = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + Properties.Settings.Default.DefaultBackgroundPath));
-                img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                GameWindow.BackgroundBitmapImage = img;
-            }
-            else
-            {
-                var img = new BitmapImage(new Uri(Properties.Settings.Default.BackgroundPath));
-                img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                GameWindow.BackgroundBitmapImage = img;
-            }
+            GameWindow.updateBackground();
         }
 
         #region OnPropertyChanged things
@@ -138,9 +117,8 @@ namespace Rad_Escape
         private void SaveSettingsButton_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Save();
-            updateImageBackground();
+            GameWindow.updateBackground();
             updateClueImages();
-            MessageBox.Show("Settings Saved");
         }
 
         private void updateClueImages()

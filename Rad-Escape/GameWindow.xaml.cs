@@ -1,12 +1,9 @@
 ﻿using System.Windows;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System;
 using System.Windows.Threading;
-using System.Drawing;
 using System.Windows.Media.Imaging;
-using System.Collections.Generic;
-using System.Windows.Forms;
+using System.IO;
 
 namespace Rad_Escape
 {
@@ -35,15 +32,6 @@ namespace Rad_Escape
 
         #endregion Updater Region
 
-        public struct ClueStruct
-        {
-            public bool isUsed;
-            public string cluePath;
-            public string clueUsedPath;
-        }
-
-        private List<ClueStruct> cluelist = new List<ClueStruct>();
-
         public BitmapImage BackgroundBitmapImage { get { return backgroundBitmapImage; } set { backgroundBitmapImage = value; OnPropertyChanged("BackgroundBitmapImage"); } }
         private BitmapImage backgroundBitmapImage;
 
@@ -57,11 +45,30 @@ namespace Rad_Escape
             InitializeUpdater();
         }
 
+        public void updateBackground()
+        {
+            if (Properties.Settings.Default.BackgroundPath == "")
+            {
+                var img = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + Properties.Settings.Default.DefaultBackgroundPath));
+                img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                BackgroundBitmapImage = img;
+            }
+            else
+            {
+                var img = new BitmapImage(new Uri(Properties.Settings.Default.BackgroundPath));
+                img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                BackgroundBitmapImage = img;
+            }
+        }
+
         public void addClue()
         {
-            ClueStruct clue = new ClueStruct();
-            clue.cluePath = @"\resources\images\lock.png"; clue.isUsed = false;
-            cluelist.Add(clue);
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Visibility = Visibility.Collapsed;
         }
 
         #region OnPropertyChanged things
@@ -79,11 +86,5 @@ namespace Rad_Escape
         }
 
         #endregion OnPropertyChanged things
-
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            e.Cancel = true;
-            this.Visibility = Visibility.Collapsed;
-        }
     }
 }
