@@ -18,17 +18,29 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel x:Name="ClueStackPannel" Grid.Column="1" Orientation="Horizontal" MinHeight="100" MaxHeight="150" HorizontalAlignment="Right" Margin="10" />
+                    <StackPanel x:Name="ClueStackPannel" Grid.Column="1" Orientation="Horizontal" MinHeight="25" MaxHeight="75" HorizontalAlignment="Right" />
                 </Grid>
                 <Separator VerticalAlignment="Bottom" />
             </Grid>
-            <StackPanel VerticalAlignment="Center">
-                <Grid Background="Black">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1" Background="Black">
                     <Viewbox MaxHeight="300">
                         <TextBox x:Name="TimerLabel" Text="{Binding Path=CurrentText}" Focusable="False" Foreground="White" Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent" />
                     </Viewbox>
                 </Grid>
-            </StackPanel>
+                <Grid Grid.Row="3" Background="Black">
+                    <TextBlock Foreground="White">
+                        Test
+                    </TextBlock>
+                </Grid>
+            </Grid>
         </DockPanel>
         <Frame NavigationUIVisibility="Hidden" x:Name="DisplayFrame" />
     </Grid>

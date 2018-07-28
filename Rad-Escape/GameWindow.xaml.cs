@@ -32,7 +32,7 @@ namespace Rad_Escape
 
         #endregion Updater Region
 
-        public int numClues;
+        public int cluesUsed;
 
         public BitmapImage BackgroundBitmapImage { get { return backgroundBitmapImage; } set { backgroundBitmapImage = value; OnPropertyChanged("BackgroundBitmapImage"); } }
         private BitmapImage backgroundBitmapImage;
@@ -73,7 +73,7 @@ namespace Rad_Escape
             Clue.updateClueUsedImage();
             Clue.IsUsed = false;
             ClueStackPannel.Children.Add(Clue);
-            numClues++;
+            cluesUsed++;
         }
 
         public void useClue()
@@ -83,6 +83,7 @@ namespace Rad_Escape
                 if (!item.IsUsed)
                 {
                     item.IsUsed = true;
+                    cluesUsed++;
                     return;
                 }
             }
@@ -95,6 +96,7 @@ namespace Rad_Escape
                 return;
             }
             ClueStackPannel.Children.RemoveAt(ClueStackPannel.Children.Count - 1);
+            cluesUsed--;
         }
 
         public void giveClueBack()
@@ -123,6 +125,16 @@ namespace Rad_Escape
                     Clue.IsUsed = false;
                 }
             }
+        }
+
+        internal void resetClues()
+        {
+            ClueStackPannel.Children.Clear();
+            for (int i = 0; i < Properties.Settings.Default.NumClues; i++)
+            {
+                addClue();
+            }
+            cluesUsed = 0;
         }
 
         public void refreshClueImages()

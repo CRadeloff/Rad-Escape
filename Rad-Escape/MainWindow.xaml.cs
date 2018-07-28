@@ -24,6 +24,7 @@ namespace Rad_Escape
             InitializeComponent();
             Timer = new TimerClass();
             GameWindow = new GameWindowClass(ref Timer);
+            GameWindow.resetClues();
         }
 
         private void InitializeUpdater()
@@ -37,21 +38,6 @@ namespace Rad_Escape
         private void updater_tick(object sender, EventArgs e)
         {
             CurrentText = Timer.CurrentText;
-            if (Timer.IsActive)
-            {
-                timerSetButton.IsEnabled = false;
-            }
-            else
-            {
-                timerSetButton.IsEnabled = true;
-            }
-        }
-
-        private void timerSetButton_Click(object sender, RoutedEventArgs e)
-        {
-            clearCompletePage();
-            timerStartStopButton.IsEnabled = true;
-            Timer.SetTimer(1, 0, 0);
         }
 
         private void clearCompletePage()
@@ -67,7 +53,6 @@ namespace Rad_Escape
         private void timerCompleteButton_Click(object sender, RoutedEventArgs e)
         {
             Timer.PauseTimer();
-            timerStartStopButton.IsEnabled = false;
             GameWindow.DisplayFrame.Content = new CompletePage("GameName", Timer.TimeLeft, "Bottom Message", 3);
         }
 
@@ -167,6 +152,14 @@ namespace Rad_Escape
         private void removeClueButton_Click(object sender, RoutedEventArgs e)
         {
             GameWindow.removeClue();
+        }
+
+        private void timerSetButton_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            clearCompletePage();
+            Timer.PauseTimer();
+            Timer.SetTimer(1, 0, 0);
+            GameWindow.resetClues();
         }
     }
 }

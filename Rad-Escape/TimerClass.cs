@@ -20,6 +20,7 @@ namespace Rad_Escape
         public TimeSpan timeLeft;
         public TimeSpan TimeLeft { get { return timeLeft; } set { FutureTime = DateTime.Now.Add(value); timeLeft = value; } }
         public bool IsActive { get; set; }
+        public bool IsTimeUp { get; set; }
 
         public string CurrentText { get; set; }
 
@@ -29,6 +30,10 @@ namespace Rad_Escape
         {
             get
             {
+                if (IsTimeUp)
+                {
+                    return new TimeSpan(0, 0, 0).ToString(TimeFormatString);
+                }
                 if (IsActive)
                 {
                     currentTextContent = CurrentTimeLeft();
@@ -59,6 +64,10 @@ namespace Rad_Escape
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            if (FutureTime <= DateTime.Now)
+            {
+                IsTimeUp = true;
+            }
             CurrentText = CurrentTextContent;
         }
 
@@ -80,6 +89,7 @@ namespace Rad_Escape
         {
             CurrentTextContent = new TimeSpan(hours, minutes, seconds).ToString(TimeFormatString);
             TimeLeft = new TimeSpan(hours, minutes, seconds);
+            IsTimeUp = false;
         }
 
         public void ToggleTimer()

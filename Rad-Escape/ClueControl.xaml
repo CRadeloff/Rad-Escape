@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Viewbox Margin="20">
+        <Viewbox Margin="10">
 
             <Image x:Name="DisplayImage" Source="{Binding Path=CurrentImage}" />
         </Viewbox>
