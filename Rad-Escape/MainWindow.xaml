@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Rad_Escape"
         mc:Ignorable="d"
         xmlns:properties="clr-namespace:Rad_Escape.Properties"
-        Title="Rad Escape" Height="755.716" Width="827" Closing="Window_Closing">
+        Title="Rad Escape" Height="972.716" Width="414" Closing="Window_Closing">
     <Grid>
         <TabControl Margin="5">
             <TabItem Header="Game Controls">
@@ -14,7 +14,7 @@
                     <DockPanel>
                         <StackPanel Margin="10">
                             <Grid>
-                                <Viewbox MaxHeight="150">
+                                <Viewbox MaxHeight="75">
                                     <StackPanel>
                                         <Label x:Name="TimerPreview" Content="{Binding Path=CurrentText}" />
                                     </StackPanel>
@@ -29,6 +29,9 @@
                             <Button x:Name="useOneCluie" Margin="10" FontSize="20" Content="Use Clue" Click="useOneCluie_Click" />
                             <Button x:Name="giveClueBack" Margin="10" FontSize="20" Content="Give Clue Back" Click="giveClueBack_Click" />
                             <Button x:Name="removeClueButton" Margin="10" FontSize="20" Content="Remove Clue" Click="removeClueButton_Click" />
+                            <TextBox x:Name="HintTextBox" MinHeight="100" MaxHeight="100" VerticalScrollBarVisibility="Auto" TextWrapping="WrapWithOverflow" Margin="10" AcceptsReturn="True" FontSize="20" />
+                            <Button x:Name="showHintButton" Margin="10" FontSize="20" Content="Show Hint" Click="showHintButton_Click" />
+                            <Button x:Name="clearHintButton" Margin="10" FontSize="20" Content="Clear Hint" Click="clearHintButton_Click" />
                         </StackPanel>
                     </DockPanel>
                 </Grid>

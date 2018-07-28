@@ -161,5 +161,15 @@ namespace Rad_Escape
             Timer.SetTimer(1, 0, 0);
             GameWindow.resetClues();
         }
+
+        private void showHintButton_Click(object sender, RoutedEventArgs e)
+        {
+            GameWindow.showHint(HintTextBox.Text);
+        }
+
+        private void clearHintButton_Click(object sender, RoutedEventArgs e)
+        {
+            GameWindow.clearHint();
+        }
     }
 }

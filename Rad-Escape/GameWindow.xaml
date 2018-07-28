@@ -25,9 +25,9 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="3*" />
-                    <RowDefinition Height="*" />
                     <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="4*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="1" Background="Black">
@@ -35,10 +35,10 @@
                         <TextBox x:Name="TimerLabel" Text="{Binding Path=CurrentText}" Focusable="False" Foreground="White" Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent" />
                     </Viewbox>
                 </Grid>
-                <Grid Grid.Row="3" Background="Black">
-                    <TextBlock Foreground="White">
-                        Test
-                    </TextBlock>
+                <Grid Grid.Row="3" Background="Black" x:Name="HintBackground" Opacity="0">
+                    <Viewbox Stretch="Uniform">
+                        <TextBox x:Name="HintTextBox" BorderBrush="Transparent" Background="Transparent" Foreground="White" FontSize="70" Focusable="False" TextWrapping="Wrap" TextAlignment="Center" MaxWidth="1500" />
+                    </Viewbox>
                 </Grid>
             </Grid>
         </DockPanel>

@@ -166,6 +166,18 @@ namespace Rad_Escape
             }
         }
 
+        public void showHint(string hint)
+        {
+            HintBackground.Opacity = 1;
+            HintTextBox.Text = hint;
+        }
+
+        internal void clearHint()
+        {
+            HintBackground.Opacity = 0;
+            HintTextBox.Text = string.Empty;
+        }
+
         #endregion OnPropertyChanged things
     }
 }
